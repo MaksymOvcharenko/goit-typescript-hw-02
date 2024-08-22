@@ -1,0 +1,9 @@
+.form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.input {
+  padding: 4px;
+}
