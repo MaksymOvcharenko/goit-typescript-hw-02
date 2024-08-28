@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import "./App.css";
 import { fetchData } from "./services/api";
 
@@ -10,22 +10,35 @@ import { ProgressBar } from "react-loader-spinner";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 
-const App = () => {
-  const notify = (message) => toast.error(message);
+interface Image{
+  
+  id: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+  description: string | null;
 
-  const [images, setImages] = useState([]);
-  const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
-  const [error, setError] = useState(false);
-  const [modalUrls, setModalUrls] = useState("");
-  const [alt, setAlt] = useState("");
-  const [modalIsOpened, setModalIsOpened] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const handleSubmit = (event) => {
+}
+
+
+
+const App = () => {
+  const notify = (message:string) => toast.error(message);
+
+  const [images, setImages] = useState<Image[]>([]);
+  const [query, setQuery] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [error, setError] = useState<boolean>(false);
+  const [modalUrls, setModalUrls] = useState<string>("");
+  const [alt, setAlt] = useState<string>("");
+  const [modalIsOpened, setModalIsOpened] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target;
-    const search = form.query.value;
+    const form = event.target as HTMLFormElement;
+    const search  = form.query.value ;
     if (!search) {
       return notify("Please enter query");
     }
@@ -63,7 +76,7 @@ const App = () => {
   const loadMore = () => {
     setPage((prev) => prev + 1);
   };
-  const openModal = (alt, modalUrls) => {
+  const openModal = (alt:string, modalUrls:string) => {
     setModalIsOpened(true);
     setAlt(alt);
     setModalUrls(modalUrls);
@@ -84,7 +97,7 @@ const App = () => {
           visible={true}
           height="80"
           width="80"
-          color="#4fa94d"
+          // color="#4fa94d"
           ariaLabel="progress-bar-loading"
           wrapperStyle={{}}
           wrapperClass=""
