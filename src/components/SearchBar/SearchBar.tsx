@@ -1,5 +1,11 @@
+import React from "react";
 import s from "./SearchBar.module.css";
-const SearchBar = ({ handleSubmit }) => {
+
+interface SearchBarProps {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ handleSubmit }) => {
   return (
     <div>
       <header>

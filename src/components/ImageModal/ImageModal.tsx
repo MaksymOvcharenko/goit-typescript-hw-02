@@ -1,3 +1,4 @@
+import React from "react";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -13,8 +14,17 @@ const customStyles = {
     backgroundColor: "rgba(0,0,0,0.8)",
   },
 };
+
 Modal.setAppElement("#root");
-const ImageModal = ({ openModal, closeModal, modalUrls, alt }) => {
+
+interface ImageModalProps {
+  openModal: boolean;
+  closeModal: () => void;
+  modalUrls: string;
+  alt: string;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ openModal, closeModal, modalUrls, alt }) => {
   return (
     <div>
       <Modal

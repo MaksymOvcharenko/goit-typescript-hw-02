@@ -1,22 +1,21 @@
 import axios from "axios";
-interface Image{
-  
+
+interface Image {
   id: string;
   urls: {
     small: string;
     regular: string;
   };
   description: string | null;
-
 }
-interface Response{
-   
+
+interface Response {
   total: number;
   total_pages: number;
   results: Image[];
-
 }
-export const fetchData = async (ApiKey:string, query:string, page:number): Promise<Response> => {
+
+export const fetchData = async (ApiKey: string, query: string, page: number): Promise<Response> => {
   const BaseURL = "https://api.unsplash.com/search/photos";
   const response = await axios.get(`${BaseURL}?client_id=${ApiKey}`, {
     params: {
